@@ -245,7 +245,7 @@ uint8_t NoMbc::ReadByte(uint16_t addr)
 	else if (addr <= 0xBFFF) {
 		return m_ram[addr - 0xA000];
 	}
-	throw std::exception("Invalid read");
+	throw std::runtime_error("Invalid read");
 }
 
 void NoMbc::WriteByte(uint16_t addr, uint8_t value)
@@ -298,7 +298,7 @@ uint8_t Mbc1Memory::ReadByte(uint16_t addr)
 	{
 		return m_ram[m_selectedRamBank][addr - 0xA000];
 	}
-	throw std::exception("Invalid address");
+	throw std::runtime_error("Invalid address");
 }
 
 void Mbc1Memory::WriteByte(uint16_t addr, uint8_t value)
@@ -380,7 +380,7 @@ uint8_t Mbc3Memory::ReadByte(uint16_t addr)
 		// TODO: RTC
 		return 0;
 	}
-	throw std::exception("Invalid memory address");
+	throw std::runtime_error("Invalid memory address");
 }
 
 void Mbc3Memory::WriteByte(uint16_t addr, uint8_t value)

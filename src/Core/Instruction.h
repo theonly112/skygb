@@ -60,8 +60,8 @@ class NotImplementedInstruction : public Instruction
 		//std::stringstream fmt;
 		//auto instruction = memory->ReadByte(registers->PC - 1);
 		//fmt << "Instruction " << static_cast<int>(instruction) << " is not implemented";
-		//throw std::exception(fmt.str().c_str());
-		throw std::exception("Instruction not implemented");
+		//throw std::runtime_error(fmt.str().c_str());
+		throw std::runtime_error("Instruction not implemented");
 	}
 };
 

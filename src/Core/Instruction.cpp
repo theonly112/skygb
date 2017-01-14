@@ -339,7 +339,7 @@ void LD_Reg16_NN::Execute(IMemory* memory, Registers* registers, Interrupts* int
 		Execute(&registers->SP, value);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 	
 }
@@ -390,12 +390,12 @@ void LD_Reg16Ptr_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts
 			Execute(memory, &registers->HL, registers->AF.High);
 			break;
 		default:
-			throw std::exception("Not implemented");
+			throw std::runtime_error("Not implemented");
 		}
 	}
 	break;
 	default:
-		throw std::exception("Not implemented");
+		throw std::runtime_error("Not implemented");
 	}
 }
 
@@ -421,7 +421,7 @@ void INC_Reg16::Execute(IMemory* memory, Registers* registers, Interrupts* inter
 		Execute(&registers->SP);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -461,7 +461,7 @@ void INC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		Execute(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -488,7 +488,7 @@ void DEC_Reg16::Execute(IMemory* memory, Registers* registers, Interrupts* inter
 		Execute(&registers->SP);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -523,7 +523,7 @@ void DEC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		Execute(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid registers");
+		throw std::runtime_error("Invalid registers");
 	}
 }
 
@@ -571,7 +571,7 @@ void LD_Reg8_N::Execute(IMemory* memory, Registers* registers, Interrupts* inter
 		Execute(&registers->AF.High, value);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -616,7 +616,7 @@ void ADD_HL_Reg16::Execute(IMemory* memory, Registers* registers, Interrupts* in
 		Execute(&registers->HL, registers->SP, registers);
 		break;
 	default:
-		throw std::exception("Not implemented");
+		throw std::runtime_error("Not implemented");
 	}
 }
 
@@ -656,7 +656,7 @@ void LD_Reg8_Reg16Ptr::Execute(IMemory* memory, Registers* registers, Interrupts
 		reg16 = &registers->HL;
 		break;
 	default:
-		throw std::exception("Invalid reg16");
+		throw std::runtime_error("Invalid reg16");
 	}
 
 	switch (m_reg8)
@@ -683,7 +683,7 @@ void LD_Reg8_Reg16Ptr::Execute(IMemory* memory, Registers* registers, Interrupts
 		Execute(memory, &registers->HL.Low, reg16);
 		break;
 	default:
-		throw std::exception("Not implemented");
+		throw std::runtime_error("Not implemented");
 	}
 }
 
@@ -895,7 +895,7 @@ void LD_Reg8_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* in
 		regL = &registers->HL.Low;
 		break;
 	default:
-		throw std::exception("Invalid left register");
+		throw std::runtime_error("Invalid left register");
 	}
 
 	u8 regRValue;
@@ -923,7 +923,7 @@ void LD_Reg8_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* in
 		regRValue = registers->HL.Low;
 		break;
 	default:
-		throw std::exception("Invalid left register");
+		throw std::runtime_error("Invalid left register");
 	}
 
 	*regL = regRValue;
@@ -990,7 +990,7 @@ void ADD_A_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* inte
 		value = registers->HL.Low;
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 	CommonInstructions::Add(destination, value, registers);
 }
@@ -1027,7 +1027,7 @@ void ADC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Adc(registers->HL.Low, registers);
 		break;
 	default:
-		throw std::exception("Invalid instruction");
+		throw std::runtime_error("Invalid instruction");
 	}
 }
 
@@ -1063,7 +1063,7 @@ void SUB_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Sub(registers->HL.Low, registers);
 		break;
 	default:
-		throw std::exception("Invalid instruction");
+		throw std::runtime_error("Invalid instruction");
 	}
 }
 
@@ -1098,7 +1098,7 @@ void SBC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Sbc(registers->HL.Low, registers);
 		break;
 	default:
-		throw std::exception("Invalid instruction");
+		throw std::runtime_error("Invalid instruction");
 	}
 }
 
@@ -1133,7 +1133,7 @@ void AND_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::And(registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1169,7 +1169,7 @@ void XOR_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Xor(registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1204,7 +1204,7 @@ void OR_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interru
 		CommonInstructions::Or(registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1239,7 +1239,7 @@ void CP_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interru
 		CommonInstructions::Cp(registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1279,7 +1279,7 @@ void POP_Reg16::Execute(IMemory* memory, Registers* registers, Interrupts* inter
 		registers->AF.Value = CommonInstructions::PopU16(registers, memory);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1339,7 +1339,7 @@ void PUSH_Reg16::Execute(IMemory* memory, Registers* registers, Interrupts* inte
 		CommonInstructions::PushU16(registers->HL.Value, registers, memory);
 		break;
 	default:
-		throw std::exception("Not implemented");
+		throw std::runtime_error("Not implemented");
 	}
 }
 
@@ -1393,7 +1393,7 @@ void JP_Z_NN::Execute(IMemory* memory, Registers* registers, Interrupts* interru
 
 void CB_N::Execute(IMemory* memory, Registers* registers, Interrupts* interrupts, Cpu* cpu)
 {
-	throw std::exception("Not implemented");
+	throw std::runtime_error("Not implemented");
 }
 
 void CALL_Z_NN::Execute(IMemory* memory, Registers* registers, Interrupts* interrupts, Cpu* cpu)
@@ -1459,7 +1459,7 @@ void JP_NC_NN::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 
 void UNKNOWN::Execute(IMemory* memory, Registers* registers, Interrupts* interrupts, Cpu* cpu)
 {
-	throw std::exception("Unknown Instruction");
+	throw std::runtime_error("Unknown Instruction");
 }
 
 void CALL_NC_NN::Execute(IMemory* memory, Registers* registers, Interrupts* interrupts, Cpu* cpu)
@@ -1712,7 +1712,7 @@ void RLC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::RLC(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1742,7 +1742,7 @@ void SWAP_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* inter
 		CommonInstructions::SWAP(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1773,7 +1773,7 @@ void RES_Bit_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* in
 		reg = &registers->AF.High;
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 
 	*reg &= ~(1 << m_bit);
@@ -1805,7 +1805,7 @@ void SLA_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Sla(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1835,7 +1835,7 @@ void RR_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interru
 		CommonInstructions::Rr(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1865,7 +1865,7 @@ void RL_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interru
 		CommonInstructions::Rl(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1895,7 +1895,7 @@ void SRL_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Srl(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1925,7 +1925,7 @@ void BIT_N_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* inte
 		CommonInstructions::Bit(1 << bit, registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -1974,7 +1974,7 @@ void SET_Bit_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* in
 		registers->AF.High |= (1 << m_bit);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -2018,7 +2018,7 @@ void SRA_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Sra(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 
@@ -2048,7 +2048,7 @@ void RRC_Reg8::Execute(IMemory* memory, Registers* registers, Interrupts* interr
 		CommonInstructions::Rrc(&registers->AF.High, registers);
 		break;
 	default:
-		throw std::exception("Invalid register");
+		throw std::runtime_error("Invalid register");
 	}
 }
 

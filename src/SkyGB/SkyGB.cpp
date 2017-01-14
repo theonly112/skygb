@@ -11,7 +11,7 @@ SDL_Window* CreateWindow()
 {
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		throw std::exception("Could not initialize SDL");
+		throw std::runtime_error("Could not initialize SDL");
 	}
 	SDL_Window* window = SDL_CreateWindow("SkyGb",
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
@@ -20,13 +20,13 @@ SDL_Window* CreateWindow()
 		
 	if(window == nullptr)
 	{
-		throw std::exception("Could not create window");
+		throw std::runtime_error("Could not create window");
 	}
 
 	SDL_GLContext context = SDL_GL_CreateContext(window);
 	if(context == nullptr)
 	{
-		throw std::exception("Could not create GL context");
+		throw std::runtime_error("Could not create GL context");
 	}
 	return window;
 }
@@ -46,7 +46,7 @@ int main()
 		s.Run();
 
 	}
-	catch(std::exception& e)
+	catch(std::runtime_error& e)
 	{
 		std::cout << e.what() << std::endl;
 		std::cin.get();

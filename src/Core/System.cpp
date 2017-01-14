@@ -30,7 +30,7 @@ void System::LoadRom(const std::string& path)
 	std::ifstream rom_stream(path.c_str(), std::ios::binary);
 	if(!rom_stream.good())
 	{
-		throw std::exception("File does not exist");
+		throw std::runtime_error("File does not exist");
 	}
 	rom_stream.seekg(0, std::ios::end);
 	std::streamoff length = rom_stream.tellg();
@@ -74,7 +74,7 @@ void System::LoadRom(const std::string& path)
 		break;
 
 	default:
-		throw std::exception("Only plain & mbc1 cartriges supported");
+		throw std::runtime_error("Only plain & mbc1 cartriges supported");
 	}
 
 	mbc->LoadRom(rom);
