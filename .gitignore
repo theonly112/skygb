@@ -82,3 +82,7 @@ SkyGB.vcxproj
 
 #Ignore TestRoms
 TestRoms
+
+#Ignore some other files
+clean.bat
+VS2015.bat
