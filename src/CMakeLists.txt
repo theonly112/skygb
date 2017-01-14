@@ -2,6 +2,6 @@ include_directories(.)
 add_subdirectory(Core)
 add_subdirectory(SkyGB)
 
-if(CMAKE_COMPILER_IS_GNUCXX)
-    add_definitions(-std=c++11)
-endif()
+set(CMAKE_CXX_STANDARD 11) # C++11...
+set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
+set(CMAKE_CXX_EXTENSIONS OFF) #...without compiler extensions like gnu++11
