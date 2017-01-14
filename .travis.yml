@@ -12,4 +12,4 @@ addons:
      - cmake
 
 script:
- - mkdir build && cmake --build build --target SkyGB
+ - mkdir build && cmake . -Bbuild && cmake --build build --target SkyGB
