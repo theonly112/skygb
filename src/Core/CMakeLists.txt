@@ -17,16 +17,25 @@ ELSE()
     MESSAGE(${SDL2_INCLUDE_DIRS})
     MESSAGE(${SDL2_LIBRARIES})
     set(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIRS})
-    set(SDL2_LIBRARY ${SDL2_LIBRARIES})
 ENDIF()
 
 MESSAGE( STATUS "SDL_INCLUDE_DIR:         " ${SDL2_INCLUDE_DIR})
 MESSAGE( STATUS "SDL2_LIBRARY:         " ${SDL2_LIBRARY})
 
 target_include_directories(core PUBLIC ${SDL2_INCLUDE_DIR})
-target_link_libraries(core ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)   
+
+IF (WIN32)
+    target_link_libraries(core ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)
+ELSE()
+    target_link_libraries(core ${SDL2_LIBRARIES})
+ENDIF()
 
 #Build a .dll
 add_library(SkyGBCore SHARED ${CAPI} ${SRCS} ${HEADERS})
 target_include_directories(SkyGBCore PUBLIC ${SDL2_INCLUDE_DIR})
-target_link_libraries(SkyGBCore ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)   
+
+IF (WIN32)
+    target_link_libraries(SkyGBCore ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)
+ELSE()
+    target_link_libraries(SkyGBCore ${SDL2_LIBRARIES})
+ENDIF()   

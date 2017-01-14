@@ -14,11 +14,15 @@ ELSE()
     MESSAGE(${SDL2_INCLUDE_DIRS})
     MESSAGE(${SDL2_LIBRARIES})
     set(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIRS})
-    set(SDL2_LIBRARY ${SDL2_LIBRARIES})
 ENDIF()
 
 target_include_directories(SkyGB PUBLIC ${SDL2_INCLUDE_DIR})
-target_link_libraries(SkyGB ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)   
+
+IF (WIN32)
+    target_link_libraries(SkyGB ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)   
+ELSE()
+    target_link_libraries(SkyGB ${SDL2_LIBRARIES})
+ENDIF()   
 
 IF (WIN32)
     configure_file(../../externals/SDL2/lib/x86/SDL2.dll ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_BUILD_TYPE}/SDL2.dll COPYONLY)
