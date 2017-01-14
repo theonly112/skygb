@@ -21,7 +21,6 @@ ENDIF()
 MESSAGE( STATUS "SDL_INCLUDE_DIR:         " ${SDL2_INCLUDE_DIR})
 MESSAGE( STATUS "SDL2_LIBRARY:         " ${SDL2_LIBRARY})
 
-IF (WIN32)
 target_include_directories(core PUBLIC ${SDL2_INCLUDE_DIR})
 target_link_libraries(core ${SDL2_LIBRARY}/SDL2 ${SDL2_LIBRARY}/SDL2main)   
 
