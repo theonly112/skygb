@@ -37,7 +37,8 @@ public:
 	Gpu(System* system);
 	void UpdateTile(u16 address, u8 value);
 	void Step();
-
+	void Reset();
+	
 	u8 control;
 	u8 scrollX;
 	u8 scrollY;

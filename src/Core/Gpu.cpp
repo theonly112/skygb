@@ -3,29 +3,7 @@
 Gpu::Gpu(System* system)
 {
 	this->system = system;
-	this->lastTicks = 0;
-	this->tick = 0;
-	this->mode = GpuModeHBlank;
-	this->scanline = 0;
-	this->control = 0;
-	this->scrollX = 0;
-	this->scrollY = 0;
-	memset(this->tiles, 0, sizeof(this->tiles));
-
-	backgroundPalette[0] = palette[0];
-	backgroundPalette[1] = palette[1];
-	backgroundPalette[2] = palette[2];
-	backgroundPalette[3] = palette[3];
-
-	spritePalette[0][0] = palette[0];
-	spritePalette[0][1] = palette[1];
-	spritePalette[0][2] = palette[2];
-	spritePalette[0][3] = palette[3];
-
-	spritePalette[1][0] = palette[0];
-	spritePalette[1][1] = palette[1];
-	spritePalette[1][2] = palette[2];
-	spritePalette[1][3] = palette[3];
+	Reset();
 }
 
 void Gpu::UpdateTile(u16 address, u8 value)
@@ -107,4 +85,31 @@ void Gpu::Step()
 void Gpu::HBlank()
 {
 	scanline++;
+}
+
+void Gpu::Reset()
+{
+	this->lastTicks = 0;
+	this->tick = 0;
+	this->mode = GpuModeHBlank;
+	this->scanline = 0;
+	this->control = 0;
+	this->scrollX = 0;
+	this->scrollY = 0;
+	memset(this->tiles, 0, sizeof(this->tiles));
+
+	backgroundPalette[0] = palette[0];
+	backgroundPalette[1] = palette[1];
+	backgroundPalette[2] = palette[2];
+	backgroundPalette[3] = palette[3];
+
+	spritePalette[0][0] = palette[0];
+	spritePalette[0][1] = palette[1];
+	spritePalette[0][2] = palette[2];
+	spritePalette[0][3] = palette[3];
+
+	spritePalette[1][0] = palette[0];
+	spritePalette[1][1] = palette[1];
+	spritePalette[1][2] = palette[2];
+	spritePalette[1][3] = palette[3];
 }

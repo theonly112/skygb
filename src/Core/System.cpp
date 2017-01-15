@@ -85,6 +85,8 @@ void System::Run()
 {
 	cpu->Reset();
 	memory->Reset();
+	gpu->Reset();
+	
 	bool exit = false;
 	while (!exit)
 	{

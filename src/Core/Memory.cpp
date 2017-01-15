@@ -144,6 +144,7 @@ void Memory::WriteByte(uint16_t addr, uint8_t value)
 		{
 			system->gpu->backgroundPalette[i] = palette[(value >> (i * 2)) & 3];
 		}
+		io[addr - 0xff00] = value;
 	}
 	else if (addr == 0xff48)
 	{
@@ -151,6 +152,7 @@ void Memory::WriteByte(uint16_t addr, uint8_t value)
 		{
 			system->gpu->spritePalette[0][i] = palette[(value >> (i * 2)) & 3];
 		}
+		io[addr - 0xff00] = value;
 	}
 	else if( addr == 0xff49)
 	{
@@ -158,6 +160,7 @@ void Memory::WriteByte(uint16_t addr, uint8_t value)
 		{
 			system->gpu->spritePalette[1][i] = palette[(value >> (i * 2)) & 3];
 		}
+		io[addr - 0xff00] = value;
 	}
 	else if (addr == 0xff0f) { system->interrupts->flags = value; }
 	else if (addr >= 0xff00 && addr <= 0xff7f)
