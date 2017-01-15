@@ -43,28 +43,7 @@ u8 Cpu::Step()
 	{
 		return 0;
 	}
-#if !DEBUG
-	//std::cout << std::uppercase;
-	//std::cout << "PC: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->PC
-	//	<< " SP: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->SP
-	//	<< " AF: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->AF.Value
-	//	<< " BC: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->BC.Value
-	//	<< " DE: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->DE.Value
-	//	<< " HL: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->HL.Value
-	//	<< "\n";
-	
-	//log << std::uppercase;
-	//log
-	//	<<  "PC: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->PC
-	//	<< " SP: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->SP
-	//	<< " AF: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->AF.Value
-	//	<< " BC: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->BC.Value
-	//	<< " DE: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->DE.Value
-	//	<< " HL: " << std::setfill('0') << std::setw(4) << std::hex << system->registers->HL.Value
-	//	<< "\n";
-#endif
 
-	
 	uint8_t instruction = system->memory->ReadByte(system->registers->PC++);
 
 	IMemory* memory = system->memory.get();
@@ -76,14 +55,17 @@ u8 Cpu::Step()
 	{
 		uint8_t cbInstruction = system->memory->ReadByte(system->registers->PC++);
 		cbInstructionSet[cbInstruction]->Execute(memory, registers, interrupts, this);
-		this->Ticks += extendedInstructionTicks[cbInstruction];
-		return extendedInstructionTicks[cbInstruction];
+		
+		uint8_t ticks = extendedInstructionTicks[cbInstruction];
+		this->Ticks += ticks;
+		return ticks;
 	}
 	else
 	{
 		instructionSet[instruction]->Execute(memory, registers, interrupts, this);
-		this->Ticks += instructionTicks[instruction];
-		return instructionTicks[instruction];
+		uint8_t ticks = instructionTicks[instruction];
+		this->Ticks += ticks;
+		return ticks;
 	}
 
 
