@@ -164,7 +164,7 @@ void System::Run()
 					cpu->Stopped = false;
 					break;
 				case SDLK_b:
-					keys.keys1.a = 1;
+					keys.keys1.b = 1;
 					cpu->Stopped = false;
 					break;
 				case SDLK_SPACE:
