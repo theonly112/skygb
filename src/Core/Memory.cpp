@@ -56,7 +56,7 @@ uint8_t Memory::ReadByte(uint16_t addr)
 	{
 		return oam[addr - 0xFE00];
 	}
-	if (addr == 0xff04) return 0;// static_cast<u8>(rand());
+	if (addr == 0xff04) return 0; // TODO 
 	if (addr == 0xff40) return system->gpu->control; 
 	if (addr == 0xff42) return system->gpu->scrollY;
 	if (addr == 0xff43) return system->gpu->scrollX; 
@@ -67,13 +67,11 @@ uint8_t Memory::ReadByte(uint16_t addr)
 		if(!(io[0x00] & 0x20))
 		{
 			auto val = static_cast<u8>(0xC0 | system->keys.keys1Value | 0x10);
-			//std::cout << static_cast<int>(val) << "\n";
 			return val;
 		}
 		if(!(io[0x00] & 0x10))
 		{
 			auto val = static_cast<u8>(0xC0 | system->keys.keys2Value | 0x20); 
-			//std::cout << static_cast<int>(val) << "\n";
 			return val;
 		}
 		if(!(io[0x00] & 0x30))
@@ -81,7 +79,6 @@ uint8_t Memory::ReadByte(uint16_t addr)
 			return 0xff;
 		}
 		return 0;
-		//return 47;
 	}
 	if (addr == 0xff0f) return system->interrupts->flags;
 	if (addr == 0xffff) return system->interrupts->enable;
