@@ -12,11 +12,13 @@
 #include "Gpu.h"
 #include "Interrupts.h"
 #include "Display.h"
+#include "Input.h"
 
 class Cpu;
 class IMemory;
 class Memory;
 class Gpu;
+class Input;
 
 class System
 {
@@ -34,7 +36,7 @@ public:
 	std::shared_ptr<Gpu> gpu;
 	std::shared_ptr<Interrupts> interrupts;
 	std::shared_ptr<Display> display;
-	keys keys;
+	std::shared_ptr<Input> input;
 };
 
 #endif

@@ -66,12 +66,12 @@ uint8_t Memory::ReadByte(uint16_t addr)
 	{
 		if(!(io[0x00] & 0x20))
 		{
-			auto val = static_cast<u8>(0xC0 | system->keys.keys1Value | 0x10);
+			auto val = static_cast<u8>(0xC0 | system->input->keys.keys1Value | 0x10);
 			return val;
 		}
 		if(!(io[0x00] & 0x10))
 		{
-			auto val = static_cast<u8>(0xC0 | system->keys.keys2Value | 0x20); 
+			auto val = static_cast<u8>(0xC0 | system->input->keys.keys2Value | 0x20); 
 			return val;
 		}
 		if(!(io[0x00] & 0x30))
