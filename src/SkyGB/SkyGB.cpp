@@ -31,18 +31,18 @@ SDL_Window* CreateWindow()
 	return window;
 }
 
-int main()
+int main(int argc, char** argv)
 {
 	try
 	{
-	
+		if(argc < 2)
+		{
+			std::cout << "Please provide the path to a rom as argument" << std::endl;
+			return 0;
+		}
 		auto window = CreateWindow();
 		System s(window);
-		//s.LoadRom("../../TestRoms/cpu_instrs.gb");
-		//s.LoadRom("../../../TestRoms/tetris.gb");
-		//s.LoadRom("../../TestRoms/Pokemon - Red Version (USA, Europe).gb");
-		//s.LoadRom("../../../../TestRoms/tetris.gb");
-		s.LoadRom("./TestRoms/tetris.gb");
+		s.LoadRom(argv[1]);	
 		s.Run();
 
 	}
