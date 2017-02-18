@@ -14,18 +14,11 @@ const COLOUR palette[4] = {
 
 class Display
 {
-	COLOUR framebuffer[160 * 144];
 	System* system;
 	SDL_Window* window;
 public:
-	int m_iWindowLine;
-
 	Display(System* system, SDL_Window* window);
 	void DrawFramebuffer() const;
-	void RenderScanline();
-	void RenderBackground(int line);
-	void RenderWindow(int line);
-	void RenderSprites(int line);
 };
 
 

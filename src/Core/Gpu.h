@@ -34,6 +34,8 @@ public:
 	COLOUR backgroundPalette[4];
 	COLOUR spritePalette[2][4];
 
+	COLOUR framebuffer[160 * 144];
+
 	Gpu(System* system);
 	void UpdateTile(uint16_t address, uint8_t value);
 	void Step();
@@ -50,6 +52,11 @@ public:
 	GpuMode mode;
 
 	void HBlank();
+	
+	void RenderScanline();
+	void RenderBackground();
+	void RenderWindow();
+	void RenderSprites();
 };
 
 #endif // Gpu_H
