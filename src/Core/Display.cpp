@@ -6,13 +6,9 @@
 #pragma comment (lib, "opengl32.lib")
 #pragma comment (lib, "glu32.lib")
 
-Display::Display(System* system, SDL_Window* window) : system(system), window(window)
+Display::Display(System* system, SDL_Window* window) : system(system), window(window), m_iWindowLine(0)
 {
 	memset(framebuffer, 255, sizeof(framebuffer));
-	m_pSpriteXCacheBuffer = new int[160 * 144];
-	m_pColorCacheBuffer = new u8[160 * 144];
-	memset(m_pColorCacheBuffer, 0, sizeof(m_pColorCacheBuffer));
-	memset(m_pSpriteXCacheBuffer, 0, sizeof(m_pSpriteXCacheBuffer));
 }
 
 void Display::DrawFramebuffer() const
@@ -24,73 +20,6 @@ void Display::DrawFramebuffer() const
 	SDL_GL_SwapWindow(window);
 	//Sleep(1000/60);
 }
-
-//void Display::RenderScanline()
-//{
-//	Gpu* gpu = system->gpu.get();
-//
-//	int mapOffset = (gpu->control & GPU_CONTROL_TILEMAP) ? 0x1c00 : 0x1800;
-//	mapOffset += (((gpu->scanline + gpu->scrollY) & 255) >> 3) << 5;
-//
-//	int lineOffset = (gpu->scrollX >> 3);
-//	int x = gpu->scrollX & 7;
-//	int y = (gpu->scanline + gpu->scrollY) & 7;
-//
-//	int pixelOffset = gpu->scanline * 160;
-//
-//	u16 tile = static_cast<u16>(system->memory->GetVRam()[mapOffset + lineOffset]);
-//
-//	u8 scanlineRow[160];
-//	int i;
-//	for (i = 0; i < 160; i++) {
-//		u8 colour = system->gpu->tiles[tile][y][x];
-//		scanlineRow[i] = colour;
-//		framebuffer[pixelOffset].r = system->gpu->backgroundPalette[colour].r;
-//		framebuffer[pixelOffset].g = system->gpu->backgroundPalette[colour].g;
-//		framebuffer[pixelOffset].b = system->gpu->backgroundPalette[colour].b;
-//
-//		pixelOffset++;
-//		x++;
-//		if (x == 8) {
-//			x = 0;
-//			lineOffset = (lineOffset + 1) & 31;
-//			tile = system->memory->GetVRam()[mapOffset + lineOffset];
-//		}
-//	}
-//
-//	for (i = 0; i < 40; i++)
-//	{
-//		sprite s = reinterpret_cast<sprite*>(system->memory->GetOam())[i];
-//
-//		int sx = s.x - 8;
-//		int sy = s.y - 16;
-//
-//		if (sy <= gpu->scanline && (sy + 8) > gpu->scanline) {
-//			COLOUR *pal = gpu->spritePalette[s.options.palette];
-//			pixelOffset = gpu->scanline * 160 + sx;
-//
-//			u8 tileRow;
-//			if (s.options.vFlip) tileRow = 7 - (gpu->scanline - sy);
-//			else tileRow = gpu->scanline - sy;
-//			int xx;
-//			for (xx = 0; xx < 8; xx++) {
-//				if (sx + xx >= 0 && sx + xx < 160 && (~s.options.priority || !scanlineRow[sx + xx])) {
-//					u8 colour;
-//					if (s.options.hFlip) colour = system->gpu->tiles[s.tile][tileRow][7 - xx];
-//					else colour = system->gpu->tiles[s.tile][tileRow][xx];
-//					if (colour) {
-//						framebuffer[pixelOffset].r = pal[colour].r;
-//						framebuffer[pixelOffset].g = pal[colour].g;
-//						framebuffer[pixelOffset].b = pal[colour].b;
-//					}
-//					pixelOffset++;
-//
-//				}
-//			}
-//		}
-//	}
-//}
-
 
 void Display::RenderScanline()
 {
@@ -257,7 +186,6 @@ void Display::RenderWindow(int line)
 			pixel |= (byte2 & (0x1 << (7 - pixelx_pos))) ? 2 : 0;
 
 			int position = line_width + bufferX;
-			m_pColorCacheBuffer[position] = pixel & 0x03;
 
 			if (false)
 			{

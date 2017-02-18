@@ -9,14 +9,14 @@ struct rgb {
 	unsigned char r, g, b;
 };
 
-typedef struct rgb COLOUR;
+using COLOUR = struct rgb;
 
 struct sprite {
 #ifndef BIG_E
 	unsigned char y;
 	unsigned char x;
 	unsigned char tile;
-	struct options {
+	struct {
 		unsigned char priority : 1;
 		unsigned char vFlip : 1;
 		unsigned char hFlip : 1;

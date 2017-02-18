@@ -35,7 +35,7 @@ public:
 	COLOUR spritePalette[2][4];
 
 	Gpu(System* system);
-	void UpdateTile(u16 address, u8 value);
+	void UpdateTile(uint16_t address, uint8_t value);
 	void Step();
 	void Reset();
 	

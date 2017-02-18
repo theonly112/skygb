@@ -11,7 +11,6 @@ class Instruction;
 
 class Cpu
 {
-	std::ofstream log;
 	System* system;
 	static Instruction* instructionSet[256];
 	static Instruction* cbInstructionSet[256];

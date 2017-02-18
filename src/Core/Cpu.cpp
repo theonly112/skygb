@@ -5,8 +5,7 @@
 #include <iomanip>
 #include <iostream>
 
-Cpu::Cpu(System* system) : 
-	log("exec.log"), system(system)
+Cpu::Cpu(System* system) : system(system)
 {
 	this->Halted = false;
 	this->Stopped = false;

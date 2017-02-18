@@ -15,8 +15,6 @@ const COLOUR palette[4] = {
 class Display
 {
 	COLOUR framebuffer[160 * 144];
-	int* m_pSpriteXCacheBuffer;
-	u8* m_pColorCacheBuffer;
 	System* system;
 	SDL_Window* window;
 public:

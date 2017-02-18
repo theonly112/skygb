@@ -25,7 +25,7 @@ class System
 private:
 
 public:
-	System(SDL_Window* window);
+	explicit System(SDL_Window* window);
 	void LoadRom(const std::string& path);
 	void Run();
 

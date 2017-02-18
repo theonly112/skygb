@@ -6,21 +6,21 @@ Gpu::Gpu(System* system)
 	Reset();
 }
 
-void Gpu::UpdateTile(u16 address, u8 value)
+void Gpu::UpdateTile(uint16_t address, uint8_t value)
 {
 	address &= 0x1ffe;
 
-	u16 tile = (address >> 4) & 511;
-	u16 y = (address >> 1) & 7;
+	uint16_t tile = (address >> 4) & 511;
+	uint16_t y = (address >> 1) & 7;
 
 	IMemory* memory = system->memory.get();
 
-	const u16 vramOffset = 0x8000;
-	u16 memoryAddress = address + vramOffset;
+	const uint16_t vramOffset = 0x8000;
+	uint16_t memoryAddress = address + vramOffset;
 
-	for (u8 x = 0; x < 8; x++)
+	for (uint8_t x = 0; x < 8; x++)
 	{
-		u8 bitIndex = 1 << (7 - x);
+		uint8_t bitIndex = 1 << (7 - x);
 
 		tiles[tile][y][x] = 
 			((memory->ReadByte(memoryAddress)	  & bitIndex) ? 1 : 0) + 
