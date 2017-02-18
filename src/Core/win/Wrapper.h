@@ -1,7 +1,7 @@
 #ifndef WRAPPER_H
 #define WRAPPER_H
 
-#include "System.h"
+#include "../System.h"
 #include <string>
 
 extern "C" {

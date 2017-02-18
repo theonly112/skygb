@@ -1,8 +1,8 @@
-set(SRCS Cpu.cpp System.cpp Registers.cpp Memory.cpp Instruction.cpp Gpu.cpp Interrupts.cpp Display.cpp Input.cpp)
-set(HEADERS Cpu.h System.h Registers.h Memory.h Instruction.h Defines.h Gpu.h Interrupts.h Display.h Cartrige.h Input.h)
+file(GLOB SRCS *.cpp)
+file(GLOB HEADERS *.h)
 
 IF (WIN32)
-    set(CAPI Wrapper.h dllmain.cpp stdafx.h targetver.h)
+    file(GLOB CAPI win/*.*)
 ENDIF()
 
 # Build a .lib

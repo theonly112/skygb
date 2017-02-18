@@ -80,6 +80,9 @@ SkyGB.vcxproj
 # Visual Studio Code files
 .vscode/*
 
+# Visual Studio 2017 settings
+.vs/*
+
 #Ignore TestRoms
 TestRoms
 
